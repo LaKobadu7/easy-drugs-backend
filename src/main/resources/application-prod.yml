@@ -1,53 +1,27 @@
-# ================================================================
-#  EASY-DRUGS — Configuration PRODUCTION
-#  Fichier : src/main/resources/application-prod.yml
-#  IMPORTANT : toutes les valeurs sensibles via variables d'env
-# ================================================================
-
 spring:
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-    hikari:
-      maximum-pool-size: 20
-
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
   jpa:
-    show-sql: false
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
 
-  data:
-    redis:
-      host: ${REDIS_HOST}
-      port: ${REDIS_PORT}
-      password: ${REDIS_PASSWORD}
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: 86400000
+  refresh-expiration: 604800000
 
-  cache:
-    type: redis
-    redis:
-      time-to-live: 600000        # 10 minutes en prod
+server:
+  port: ${PORT:8080}
 
 logging:
   level:
     com.easydrugs: INFO
-    org.springframework: WARN
-    root: WARN
-  file:
-    name: /var/log/easydrugs/app.log
-
-# JWT longue durée en prod (24h)
-jwt:
-  secret: ${JWT_SECRET}
-  expiration: 86400000
-
-# Désactiver Swagger en prod
-springdoc:
-  swagger-ui:
-    enabled: false
-  api-docs:
-    enabled: false
-
-# HTTPS obligatoire
-server:
-  port: ${PORT:8080}
