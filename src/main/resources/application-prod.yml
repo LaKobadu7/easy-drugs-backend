@@ -10,10 +10,10 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        temp:
-          use_jdbc_metadata_defaults: false
   flyway:
-    enabled: false
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
   data:
     redis:
       host: localhost
@@ -32,3 +32,4 @@ server:
 logging:
   level:
     com.easydrugs: INFO
+    org.flywaydb: DEBUG
