@@ -54,11 +54,12 @@
         </dependency>
 
         <!-- ── PostGIS (géospatial) ── -->
-       <!-- <dependency>
+       <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-spatial</artifactId>
             <version>${hibernate-spatial.version}</version>
         </dependency>
+        
 
         <!-- ── SÉCURITÉ ── -->
         <dependency>
