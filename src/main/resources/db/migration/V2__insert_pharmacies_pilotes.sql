@@ -4,32 +4,30 @@
 -- ================================================================
 
 -- ── Compte administrateur ───────────────────────────────────────
--- Mot de passe : Admin@EasyDrugs2026 (BCrypt)
 INSERT INTO utilisateur (nom, prenom, email, telephone, mot_de_passe, role)
 VALUES (
     'EASY-DRUGS', 'Admin',
     'admin@easy-drugs.cm',
     '+237690000001',
-    '$2a$12$K8Nh9P2gL7mX4vY3cQ1rOuJ5nW0eA6bD8sF2hR4tZ9pI7kM3lN1o',  -- à régénérer
+    '$2a$12$AtmLm2eehAYUpE2gIzXDgub3aMZS12nXD0.Gt6W8XGqE9bXYbFXYu',
     'ADMIN'
 );
 
 -- ── Comptes pharmacies ──────────────────────────────────────────
 INSERT INTO utilisateur (nom, prenom, email, telephone, mot_de_passe, role)
 VALUES
-    ('Centrale', 'Pharmacie', 'centrale@easy-drugs.cm', '+237690000002',
-     '$2a$12$placeholder_hash_pharmacie_1', 'PHARMACIE'),
-    ('du Peuple', 'Pharmacie', 'peuple@easy-drugs.cm', '+237690000003',
-     '$2a$12$placeholder_hash_pharmacie_2', 'PHARMACIE');
+    ('La Référence', 'Pharmacie', 'reference@easy-drugs.cm', '+237690000002',
+     '$2a$12$PFCSkMMSsOh1X0sB8WfsJedCaaChpVxPpD840eSj2XksJm65PHKMK', 'PHARMACIE'),
+    ('Rosa Parks', 'Pharmacie', 'rosaparks@easy-drugs.cm', '+237690000003',
+     '$2a$12$138MwXcqquSMz2mW.OwglOrlxcPraVmNP4x2gE16MRwuS8en5FL6.', 'PHARMACIE');
 
--- ── Pharmacies pilotes avec coordonnées GPS Sangmélima ─────────
--- Coordonnées réelles approximatives — à ajuster avec les pharmacies partenaires
+-- ── Pharmacies pilotes avec coordonnées GPS Sangmélima ──────────
 INSERT INTO pharmacie (nom, adresse, coordonnees, latitude, longitude, statut, horaires, validee, zone_geo, admin_id)
 VALUES
     (
-        'Pharmacie Centrale',
-        'Avenue Principale, Centre-ville, Sangmélima',
-        ST_SetSRID(ST_MakePoint(11.9820, 3.0172), 4326),   -- (lon, lat) pour PostGIS
+        'Pharmacie La Référence',
+        'Quartier Avenue des Banques, Sangmélima',
+        ST_SetSRID(ST_MakePoint(11.9820, 3.0172), 4326),
         3.0172, 11.9820,
         'OUVERTE',
         'Lun-Sam : 7h30-20h00 | Dim : 9h-13h',
@@ -38,8 +36,8 @@ VALUES
         (SELECT id FROM utilisateur WHERE telephone = '+237690000001')
     ),
     (
-        'Pharmacie du Peuple',
-        'Quartier Administratif, Sangmélima',
+        'Pharmacie Rosa Parks',
+        'Quartier Centre, Sangmélima',
         ST_SetSRID(ST_MakePoint(11.9850, 3.0155), 4326),
         3.0155, 11.9850,
         'OUVERTE',
