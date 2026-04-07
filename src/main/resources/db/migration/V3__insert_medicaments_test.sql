@@ -29,10 +29,10 @@ VALUES
     ('Ventoline 100µg (aérosol)',   'GAZ',  'Bronchodilatateur — asthme',          'Flacon pressurisé 200 doses', 'GSK CM'),
     ('Béclométasone 250µg',         'GAZ',  'Corticoïde inhalé — asthme',          'Flacon pressurisé 200 doses', 'GSK CM');
 
--- ── Stocks initiaux — Pharmacie Centrale ────────────────────────
+-- ── Stocks initiaux — Pharmacie La Référence ────────────────────────
 INSERT INTO stock (pharmacie_id, medicament_id, quantite, disponible, prix, seuil_alerte)
 SELECT
-    (SELECT id FROM pharmacie WHERE nom = 'Pharmacie Centrale'),
+    (SELECT id FROM pharmacie WHERE nom = 'Pharmacie La Référence'),
     m.id,
     s.quantite,
     s.quantite > 0,
@@ -51,10 +51,10 @@ FROM (VALUES
 ) AS s(nom, quantite, prix, seuil)
 JOIN medicament m ON m.nom = s.nom;
 
--- ── Stocks initiaux — Pharmacie du Peuple ───────────────────────
+-- ── Stocks initiaux — Pharmacie Rosa Parks ───────────────────────
 INSERT INTO stock (pharmacie_id, medicament_id, quantite, disponible, prix, seuil_alerte)
 SELECT
-    (SELECT id FROM pharmacie WHERE nom = 'Pharmacie du Peuple'),
+    (SELECT id FROM pharmacie WHERE nom = 'Pharmacie Rosa Parks'),
     m.id,
     s.quantite,
     s.quantite > 0,
